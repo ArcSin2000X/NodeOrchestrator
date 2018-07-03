@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 using Newtonsoft.Json;
 
@@ -25,7 +27,7 @@ namespace Playground
 
             Wallet wallet = new Wallet
             {
-                Mnemonic = "cover act reduce actress hen mystery burger junk find hello diamond junk",
+                Mnemonic = "woman assume obscure neglect today real blue print wrap follow salad shadow",
                 Password = "password",
                 FolderPath = "c:/Dev/wallets",
                 Name = "test2",
@@ -52,11 +54,10 @@ namespace Playground
 
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-                {   
+                {
                     var result = streamReader.ReadToEnd();
-                    Console.WriteLine(result.ToString());
+                    //Console.WriteLine(result.ToString());
                 }
-
             }
             catch (Exception e)
             {
@@ -64,7 +65,7 @@ namespace Playground
                 throw;
             }
 
-
+            Console.WriteLine("end");
 
         }
     }
