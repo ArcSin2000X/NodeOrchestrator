@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Web;
+using Newtonsoft.Json;
 
 namespace Playground
 {
     class RestoreWallet
     {
         private string _url;
+        private static readonly HttpClient client = new HttpClient();
         public RestoreWallet(string URL)
         {
             _url = URL;
@@ -17,28 +21,49 @@ namespace Playground
         public void callAPI()
         {
             string tempURL1 = "http://localhost:38221/api/Node/status";
-            string valueString = string.Empty;
-            string payload = string.Empty;
+            string tempURL2 = "http://localhost:38221/api/Wallet/recover";
 
+            Wallet wallet = new Wallet
+            {
+                Mnemonic = "cover act reduce actress hen mystery burger junk find hello diamond junk",
+                Password = "password",
+                FolderPath = "c:/Dev/wallets",
+                Name = "test2",
+                Network = "testnet",
+                CreationDate = new DateTime(2018,7,3,0,0,0,DateTimeKind.Utc)
+            };
 
-            //"mnemonic": "string"
-            //"password": "string"
-            //"folderPath": "string"
-            //"name": "string"
-            //"network": "string"
-            //"creationDate": "2018-07-03T09:11:49.324Z"
-        
+            string payload = JsonConvert.SerializeObject(wallet, Formatting.None);
+            //string payload = string.Empty;
+            Console.WriteLine(payload);
 
             try
             {
-                WebRequest webRequest = WebRequest.Create(tempURL1);
-                webRequest.Timeout = 5000;
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(tempURL2);
+
+                httpWebRequest.ContentType = "application/json";
+                //httpWebRequest.Accept = "application/json";
+                httpWebRequest.Method = "POST";
+
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+                    streamWriter.Write(payload);
+                }
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {   
+                    var result = streamReader.ReadToEnd();
+                    Console.WriteLine(result.ToString());
+                }
+
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
                 throw;
             }
+
 
 
         }
