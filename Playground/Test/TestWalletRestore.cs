@@ -4,6 +4,7 @@ using System.Text;
 using NodeBot.API.Abstraction;
 using NodeBot.API.Calls;
 using NodeBot.Utils;
+using NodeBot.Web;
 
 namespace NodeBotPlayground.Test
 {
@@ -11,30 +12,22 @@ namespace NodeBotPlayground.Test
     {
         public static void RunTest()
         {
-            //RestoreWallet rw = new RestoreWallet("a");
-            //rw.CallAPI();
-            //WalletData wallet = new WalletData
-            //{
-            //    Mnemonic = "woman assume obscure neglect today real blue print wrap follow salad shadow",
-            //    Password = "password",
-            //    FolderPath = "",
-            //    Name = "test2",
-            //    Network = "StratisTest",
-            //    CreationDate = new DateTime(2018, 7, 4, 0, 0, 0, DateTimeKind.Utc)
-            //};
-
             WalletData wallet = new Wallet()
                 .CreationDate(new DateTime(2018, 7, 4, 0, 0, 0, DateTimeKind.Utc))
                 .FolderPath("")
-                .Mnemonic("")
-                .Name("")
-                .Network("")
-                .Password("")
+                .Mnemonic("woman assume obscure neglect today real blue print wrap follow salad shadow")
+                .Name("test2")
+                .Network("StratisTest")
+                .Password("password")
                 .Create;
 
-            Console.WriteLine(FormatConvert.ObjToJSON(wallet));
-            //Console.WriteLine("-");
-            //Console.WriteLine(FormatConvert.ToQueryString(wallet));
+            NodeWeb nodeWeb = new NodeWeb();
+            nodeWeb.Payload = FormatConvert.ObjToJSON(wallet);
+            nodeWeb.Port = "38221";
+            nodeWeb.Path = "api/Wallet/recover";
+            nodeWeb.Host = "localhost";
+            nodeWeb.Request();
+
         }
 
     }

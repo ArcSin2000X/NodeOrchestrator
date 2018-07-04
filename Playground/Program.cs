@@ -8,8 +8,6 @@ namespace NodeBotPlayground
         static void Main(string[] args)
         {
             TestWalletRestore.RunTest();
-
-
             Console.ReadKey();
         }
 
