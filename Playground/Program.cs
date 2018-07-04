@@ -1,15 +1,14 @@
 ﻿using System;
+using NodeBotPlayground.Test;
 
-namespace Playground
+namespace NodeBotPlayground
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            TestWalletRestore.RunTest();
 
-            RestoreWallet rw = new RestoreWallet("a");
-            rw.callAPI();
 
             Console.ReadKey();
         }

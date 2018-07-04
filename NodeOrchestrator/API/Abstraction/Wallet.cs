@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Playground
+namespace NodeBot.API.Abstraction
 {
     public class Wallet
     {

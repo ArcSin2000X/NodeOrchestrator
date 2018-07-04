@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Playground
+﻿namespace NodeBot.API.Abstraction
 {
     class Mnemonic
     {

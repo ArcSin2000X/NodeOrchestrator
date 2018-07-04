@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
 using Newtonsoft.Json;
+using NodeBot.API.Abstraction;
 
-namespace Playground
+namespace NodeBot.API.Calls
 {
-    class RestoreWallet
+    public class RestoreWallet
     {
         private string _url;
         private static readonly HttpClient client = new HttpClient();
@@ -20,7 +16,7 @@ namespace Playground
             _url = URL;
         }
 
-        public void callAPI()
+        public void CallAPI()
         {
             string tempURL1 = "http://localhost:38221/api/Node/status";
             string tempURL2 = "http://localhost:38221/api/Wallet/recover";
@@ -29,10 +25,10 @@ namespace Playground
             {
                 Mnemonic = "woman assume obscure neglect today real blue print wrap follow salad shadow",
                 Password = "password",
-                FolderPath = "c:/Dev/wallets",
+                FolderPath = "",
                 Name = "test2",
-                Network = "testnet",
-                CreationDate = new DateTime(2018,7,3,0,0,0,DateTimeKind.Utc)
+                Network = "StratisTest",
+                CreationDate = new DateTime(2018,7,4,0,0,0,DateTimeKind.Utc)
             };
 
             string payload = JsonConvert.SerializeObject(wallet, Formatting.None);

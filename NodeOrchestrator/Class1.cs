@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NodeOrchestrator
+﻿namespace NodeBot
 {
     public class Test1
     {
