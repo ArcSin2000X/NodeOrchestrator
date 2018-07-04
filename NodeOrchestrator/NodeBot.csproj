@@ -11,7 +11,7 @@
   <ItemGroup>
     <Folder Include="Format\" />
     <Folder Include="Log\" />
-    <Folder Include="Web\" />
+    <Folder Include="Scenarios\" />
   </ItemGroup>
 
 </Project>
