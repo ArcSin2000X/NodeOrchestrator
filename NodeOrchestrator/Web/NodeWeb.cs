@@ -8,7 +8,8 @@ namespace NodeBot.Web
 {
     public class NodeWeb
     {
-        public void Request()
+        public string RequestType { get; set; }
+        public NodeWeb Request()
         {
             string tempURL1 = "http://localhost:38221/api/Node/status";
             string tempURL2 = "http://localhost:38221/api/Wallet/recover";
@@ -40,6 +41,7 @@ namespace NodeBot.Web
                 throw;
             }
 
+            return this;
         }
     }
 }
